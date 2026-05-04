@@ -282,6 +282,104 @@ function MagneticBtn({ children, href, dark }) {
 
 // ─── Hero ─────────────────────────────────────────────────────────────────────
 
+// ─── Scroll indicator (verbergt zodra gebruiker scrollt) ──────────────────────
+
+function ScrollIndicator() {
+  const { scrollY } = useScroll()
+  const [visible, setVisible] = useState(true)
+
+  useEffect(() => {
+    return scrollY.on('change', v => setVisible(v < 30))
+  }, [scrollY])
+
+  return (
+    <AnimatePresence>
+      {visible && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.6, ease: EASE, delay: visible ? 2.2 : 0 }}
+          style={{
+            position: 'absolute', bottom: '2.5rem', left: '2.5rem',
+            display: 'flex', alignItems: 'center', gap: '0.8rem',
+            pointerEvents: 'none',
+          }}
+        >
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
+            style={{ width: 1, height: 36, background: 'linear-gradient(to bottom, var(--accent), transparent)' }}
+          />
+          <span style={{ fontSize: '0.62rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--mid)', opacity: 0.5 }}>Scroll</span>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  )
+}
+
+// ─── LinkedIn floating button ─────────────────────────────────────────────────
+
+function LinkedInButton() {
+  const { scrollY } = useScroll()
+  const [show, setShow] = useState(false)
+
+  useEffect(() => {
+    return scrollY.on('change', v => setShow(v > 120))
+  }, [scrollY])
+
+  return (
+    <AnimatePresence>
+      {show && (
+        <motion.a
+          href="https://www.linkedin.com/in/moniquesmeding"
+          target="_blank"
+          rel="noopener noreferrer"
+          initial={{ y: 80, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: 80, opacity: 0 }}
+          transition={{ type: 'spring', stiffness: 260, damping: 28 }}
+          whileHover={{ scale: 1.06, y: -3 }}
+          whileTap={{ scale: 0.97 }}
+          data-hover
+          style={{
+            position: 'fixed',
+            bottom: '2rem',
+            right: '2rem',
+            zIndex: 400,
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.65rem',
+            background: '#fff',
+            border: '1px solid var(--border)',
+            borderRadius: 100,
+            padding: '0.65rem 1.2rem 0.65rem 0.8rem',
+            boxShadow: '0 8px 32px rgba(26,43,56,0.12), 0 2px 8px rgba(26,43,56,0.06)',
+            textDecoration: 'none',
+            color: 'var(--dark)',
+          }}
+        >
+          {/* LinkedIn logo */}
+          <div style={{
+            width: 28, height: 28, borderRadius: '50%',
+            background: '#0A66C2',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            flexShrink: 0,
+          }}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </div>
+          <div>
+            <div style={{ fontSize: '0.72rem', fontWeight: 600, color: 'var(--dark)', lineHeight: 1.1, letterSpacing: '-0.01em' }}>Monique Smeding</div>
+            <div style={{ fontSize: '0.6rem', color: 'var(--mid)', letterSpacing: '0.04em' }}>LinkedIn profiel</div>
+          </div>
+        </motion.a>
+      )}
+    </AnimatePresence>
+  )
+}
+
 function HeroCard({ sx, sy }) {
   const cx = useTransform(sx, v => v * -0.45)
   const cy = useTransform(sy, v => v * -0.3)
@@ -512,23 +610,8 @@ function Hero() {
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2.2, duration: 0.8 }}
-        style={{
-          position: 'absolute', bottom: '2.5rem', left: '2.5rem',
-          display: 'flex', alignItems: 'center', gap: '0.8rem',
-        }}
-      >
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
-          style={{ width: 1, height: 36, background: 'linear-gradient(to bottom, var(--accent), transparent)' }}
-        />
-        <span style={{ fontSize: '0.62rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--mid)', opacity: 0.5 }}>Scroll</span>
-      </motion.div>
+      {/* Scroll indicator — verdwijnt zodra gebruiker scrollt */}
+      <ScrollIndicator />
 
       <style>{`
         @media (max-width: 900px) { .hero-card-wrapper { display: none !important; } }
@@ -1273,6 +1356,7 @@ export default function MSFSWebsite() {
     <>
       <Cursor />
       <ProgressBar />
+      <LinkedInButton />
       <Nav />
       <Hero />
       <Marquee />
