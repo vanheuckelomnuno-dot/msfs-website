@@ -1,0 +1,22 @@
+/*
+  # Voorkomt clickjacking (je site in een iframe insluiten)
+  X-Frame-Options: DENY
+  Content-Security-Policy: frame-ancestors 'none'
+
+  # Voorkomt MIME-type sniffing (browser voert js niet uit als het als tekst aangeboden wordt)
+  X-Content-Type-Options: nosniff
+
+  # Beperkt welke referrer-informatie verstuurd wordt
+  Referrer-Policy: strict-origin-when-cross-origin
+
+  # Dwingt HTTPS af voor 2 jaar, inclusief subdomeinen
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+
+  # Schakelt ongebruikte browser-API's uit (camera, microfoon, locatie, etc.)
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=(), browsing-topics=()
+
+  # Voorkomt dat een pop-up de opener-pagina kan aansturen
+  Cross-Origin-Opener-Policy: same-origin-allow-popups
+
+  # Content Security Policy — wat mag de browser laden?
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests
