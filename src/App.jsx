@@ -11,9 +11,9 @@ import {
 } from 'framer-motion'
 import './index.css'
 
-const EASE = [0.25, 0.46, 0.45, 0.94]
-const EASE_OUT = [0.0, 0.0, 0.2, 1.0]
-const SPRING = { type: 'spring', stiffness: 120, damping: 22 }
+const EASE = [0.16, 1, 0.3, 1]       // expo-out: snel start, zacht einde
+const EASE_OUT = [0.16, 1, 0.3, 1]
+const SPRING = { type: 'spring', stiffness: 72, damping: 18 }
 
 // ─── Icons ────────────────────────────────────────────────────────────────────
 
@@ -572,7 +572,7 @@ function Marquee() {
 
 function Counter({ to, suffix = '' }) {
   const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-60px' })
+  const inView = useInView(ref, { once: true, margin: '80px' })
   const [n, setN] = useState(0)
 
   useEffect(() => {
@@ -594,7 +594,7 @@ function Counter({ to, suffix = '' }) {
 
 function Stats() {
   const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-60px' })
+  const inView = useInView(ref, { once: true, margin: '80px' })
 
   return (
     <section ref={ref} style={{ padding: '5rem 2.5rem', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }}>
@@ -606,9 +606,9 @@ function Stats() {
         ].map((s, i) => (
           <motion.div
             key={s.label}
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 14 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, ease: EASE, delay: i * 0.15 }}
+            transition={{ duration: 1.05, ease: EASE, delay: i * 0.18 }}
             style={{
               paddingLeft: '2rem',
               borderLeft: '2px solid var(--border)',
@@ -628,17 +628,17 @@ function Stats() {
 
 function IntroBanner() {
   const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-60px' })
+  const inView = useInView(ref, { once: true, margin: '80px' })
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
-  const xShift = useTransform(scrollYProgress, [0, 1], ['-4%', '4%'])
+  const xShift = useTransform(scrollYProgress, [0, 1], ['-2%', '2%'])
 
   return (
     <section ref={ref} style={{ background: 'var(--dark)', padding: '8rem 2.5rem', overflow: 'hidden' }}>
       <motion.div style={{ x: xShift, maxWidth: 1000, margin: '0 auto' }}>
         <motion.p
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 14 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.85, ease: EASE, delay: 0.1 }}
+          transition={{ duration: 1.1, ease: EASE, delay: 0.1 }}
           style={{
             fontFamily: 'Fraunces', fontSize: 'clamp(1.6rem, 3.5vw, 2.8rem)',
             color: '#fff', lineHeight: 1.4, fontStyle: 'italic', fontWeight: 300,
@@ -670,7 +670,7 @@ function IntroBanner() {
 
 function OverMonique() {
   const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
+  const inView = useInView(ref, { once: true, margin: '60px' })
 
   return (
     <section id="over" style={{ padding: '9rem 2.5rem' }} ref={ref}>
@@ -690,7 +690,7 @@ function OverMonique() {
             <motion.h2
               initial={{ y: '100%' }}
               animate={inView ? { y: 0 } : {}}
-              transition={{ duration: 0.9, ease: EASE_OUT, delay: 0.1 }}
+              transition={{ duration: 1.1, ease: EASE_OUT, delay: 0.1 }}
               style={{ fontSize: 'clamp(2.4rem, 4.5vw, 4rem)', color: 'var(--dark)', marginBottom: '2.2rem', letterSpacing: '-0.03em', lineHeight: 0.95 }}
             >
               Ik ben Monique<br />
@@ -704,9 +704,9 @@ function OverMonique() {
             'Vanuit mijn bedrijf MSFS werk ik voor organisaties binnen onder andere zorg en publieke dienstverlening. Ik word vaak ingezet in situaties waar tijdelijke versterking nodig is, processen beter moeten of waar meer grip en rust gewenst is.',
           ].map((p, i) => (
             <motion.p key={i}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, ease: EASE, delay: 0.22 + i * 0.12 }}
+              transition={{ duration: 1.05, ease: EASE, delay: 0.22 + i * 0.14 }}
               style={{ color: 'var(--mid)', lineHeight: 1.9, marginBottom: '1.2rem', fontSize: '1rem' }}
             >
               {p}
@@ -722,9 +722,9 @@ function OverMonique() {
             { label: 'Structuur in complexe omgevingen', icon: IconStructuur, nr: '04' },
           ].map(({ label, icon: Icon, nr }, i) => (
             <motion.div key={label}
-              initial={{ opacity: 0, x: 28 }}
+              initial={{ opacity: 0, x: 14 }}
               animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.65, ease: EASE, delay: 0.28 + i * 0.1 }}
+              transition={{ duration: 1.0, ease: EASE, delay: 0.28 + i * 0.12 }}
               whileHover={{ x: 6 }}
               style={{
                 display: 'flex', alignItems: 'center', gap: '1.1rem',
@@ -774,8 +774,8 @@ function TiltCard({ dienst }) {
   return (
     <motion.div
       ref={ref}
-      variants={{ hidden: { y: 50, opacity: 0 }, visible: { y: 0, opacity: 1 } }}
-      transition={{ duration: 0.7, ease: EASE }}
+      variants={{ hidden: { y: 24, opacity: 0 }, visible: { y: 0, opacity: 1 } }}
+      transition={{ duration: 1.1, ease: EASE }}
       onMouseMove={track}
       onMouseEnter={() => setHov(true)}
       onMouseLeave={leave}
@@ -824,7 +824,7 @@ function TiltCard({ dienst }) {
 
 function Diensten() {
   const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
+  const inView = useInView(ref, { once: true, margin: '60px' })
 
   return (
     <section id="diensten" style={{ padding: '9rem 2.5rem', background: 'var(--bg)' }}>
@@ -832,7 +832,7 @@ function Diensten() {
         <SectionHeader label="Diensten" title="Waar ik bij help" />
         <motion.div
           ref={ref}
-          variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.13 } } }}
+          variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.18 } } }}
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
           style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1.5rem' }}
@@ -865,16 +865,16 @@ const CASES = [
 
 function Ervaring() {
   const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
+  const inView = useInView(ref, { once: true, margin: '60px' })
 
   return (
     <section id="ervaring" style={{ padding: '9rem 2.5rem', background: 'var(--dark)' }} ref={ref}>
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         <SectionHeader label="Ervaring" title="Ervaring die werkt in de praktijk" dark />
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, ease: EASE, delay: 0.15 }}
+          transition={{ duration: 1.0, ease: EASE, delay: 0.15 }}
           style={{ color: 'rgba(255,255,255,0.4)', textAlign: 'center', maxWidth: 520, margin: '-1.5rem auto 4rem', lineHeight: 1.85 }}
         >
           In mijn opdrachten werk ik in dynamische en vaak complexe omgevingen.
@@ -883,9 +883,9 @@ function Ervaring() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1.5rem' }} className="cases-grid">
           {CASES.map((c, i) => (
             <motion.div key={c.org}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 18 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.85, ease: EASE, delay: 0.18 + i * 0.15 }}
+              transition={{ duration: 1.1, ease: EASE, delay: 0.18 + i * 0.18 }}
               whileHover={{ y: -8, boxShadow: '0 32px 64px rgba(0,0,0,0.4)' }}
               style={{
                 background: 'rgba(255,255,255,0.04)',
@@ -930,7 +930,7 @@ const PIJLERS = [
 
 function Aanpak() {
   const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
+  const inView = useInView(ref, { once: true, margin: '60px' })
 
   return (
     <section id="aanpak" style={{ padding: '9rem 2.5rem', background: 'var(--surface)', borderTop: '1px solid var(--border)' }} ref={ref}>
@@ -939,9 +939,9 @@ function Aanpak() {
         <div style={{ maxWidth: 820, margin: '0 auto' }}>
           {PIJLERS.map((p, i) => (
             <motion.div key={p.nr}
-              initial={{ opacity: 0, x: -30 }}
+              initial={{ opacity: 0, x: -14 }}
               animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.75, ease: EASE, delay: 0.12 + i * 0.15 }}
+              transition={{ duration: 1.05, ease: EASE, delay: 0.12 + i * 0.18 }}
               style={{
                 display: 'grid', gridTemplateColumns: '72px 1fr',
                 gap: '2.5rem', padding: '2.8rem 0',
@@ -949,9 +949,9 @@ function Aanpak() {
               }}
             >
               <motion.div
-                initial={{ scale: 0, rotate: -10 }}
+                initial={{ scale: 0.6, rotate: -5 }}
                 animate={inView ? { scale: 1, rotate: 0 } : {}}
-                transition={{ type: 'spring', stiffness: 240, damping: 20, delay: 0.3 + i * 0.15 }}
+                transition={{ type: 'spring', stiffness: 120, damping: 18, delay: 0.3 + i * 0.18 }}
                 style={{
                   width: 56, height: 56, borderRadius: 14,
                   background: 'var(--accent-light)', border: '1.5px solid var(--accent)',
@@ -979,7 +979,7 @@ function Aanpak() {
 
 function CTABanner() {
   const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-60px' })
+  const inView = useInView(ref, { once: true, margin: '80px' })
 
   return (
     <section ref={ref} style={{ padding: '8rem 2.5rem', background: 'var(--accent)', position: 'relative', overflow: 'hidden' }}>
@@ -988,9 +988,9 @@ function CTABanner() {
 
       <div style={{ maxWidth: 820, margin: '0 auto', textAlign: 'center', position: 'relative' }}>
         <motion.p
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 8 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, ease: EASE }}
+          transition={{ duration: 0.9, ease: EASE }}
           style={{ fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)', marginBottom: '1.5rem' }}
         >
           Klaar om te starten?
@@ -1006,17 +1006,17 @@ function CTABanner() {
           </motion.h2>
         </div>
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, ease: EASE, delay: 0.25 }}
+          transition={{ duration: 0.95, ease: EASE, delay: 0.25 }}
           style={{ color: 'rgba(255,255,255,0.6)', lineHeight: 1.85, marginBottom: '2.8rem', fontSize: '1.05rem' }}
         >
           Ik denk graag met je mee — vrijblijvend en concreet.
         </motion.p>
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 8 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, ease: EASE, delay: 0.35 }}
+          transition={{ duration: 0.95, ease: EASE, delay: 0.35 }}
         >
           <motion.a
             href="#contact"
@@ -1038,7 +1038,7 @@ function CTABanner() {
 
 function Contact() {
   const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-60px' })
+  const inView = useInView(ref, { once: true, margin: '80px' })
   const [form, setForm] = useState({ naam: '', email: '', bericht: '' })
   const [sent, setSent] = useState(false)
   const [focused, setFocused] = useState(null)
@@ -1060,9 +1060,9 @@ function Contact() {
       <div style={{ maxWidth: 1200, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '7rem', alignItems: 'start' }} className="contact-grid">
         <div>
           <motion.span
-            initial={{ opacity: 0, x: -16 }}
+            initial={{ opacity: 0, x: -8 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.5, ease: EASE }}
+            transition={{ duration: 0.9, ease: EASE }}
             style={{ display: 'inline-flex', alignItems: 'center', gap: '0.55rem', fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '1.8rem' }}
           >
             <span style={{ display: 'block', width: 22, height: 1.5, background: 'var(--accent)' }} />
@@ -1081,18 +1081,18 @@ function Contact() {
           </div>
 
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, ease: EASE, delay: 0.22 }}
+            transition={{ duration: 0.95, ease: EASE, delay: 0.22 }}
             style={{ color: 'var(--mid)', lineHeight: 1.9, marginBottom: '3rem', maxWidth: 380 }}
           >
             Stuur een bericht en ik reageer zo snel mogelijk. Een eerste gesprek is altijd vrijblijvend.
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, ease: EASE, delay: 0.32 }}
+            transition={{ duration: 0.95, ease: EASE, delay: 0.32 }}
             style={{ display: 'flex', flexDirection: 'column', gap: '1.1rem' }}
           >
             {[
@@ -1229,26 +1229,26 @@ function Footer() {
 
 function SectionHeader({ label, title, dark }) {
   const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-60px' })
+  const inView = useInView(ref, { once: true, margin: '80px' })
   const textColor = dark ? '#fff' : 'var(--dark)'
 
   return (
     <div ref={ref} style={{ textAlign: 'center', marginBottom: '4.5rem' }}>
       <motion.span
-        initial={{ opacity: 0, y: 14 }}
+        initial={{ opacity: 0, y: 8 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.55, ease: EASE }}
+        transition={{ duration: 0.9, ease: EASE }}
         style={{ display: 'inline-flex', alignItems: 'center', gap: '0.7rem', fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '1.1rem' }}
       >
         <motion.span
           initial={{ scaleX: 0 }} animate={inView ? { scaleX: 1 } : {}}
-          transition={{ duration: 0.5, ease: EASE, delay: 0.1 }}
+          transition={{ duration: 0.8, ease: EASE, delay: 0.1 }}
           style={{ display: 'block', width: 22, height: 1.5, background: 'var(--accent)', transformOrigin: 'left' }}
         />
         {label}
         <motion.span
           initial={{ scaleX: 0 }} animate={inView ? { scaleX: 1 } : {}}
-          transition={{ duration: 0.5, ease: EASE, delay: 0.1 }}
+          transition={{ duration: 0.8, ease: EASE, delay: 0.1 }}
           style={{ display: 'block', width: 22, height: 1.5, background: 'var(--accent)', transformOrigin: 'right' }}
         />
       </motion.span>
@@ -1256,7 +1256,7 @@ function SectionHeader({ label, title, dark }) {
         <motion.h2
           initial={{ y: '100%' }}
           animate={inView ? { y: 0 } : {}}
-          transition={{ duration: 0.85, ease: EASE_OUT, delay: 0.12 }}
+          transition={{ duration: 1.1, ease: EASE_OUT, delay: 0.12 }}
           style={{ fontSize: 'clamp(1.9rem, 3.8vw, 3rem)', color: textColor, letterSpacing: '-0.025em', lineHeight: 1.05 }}
         >
           {title}
