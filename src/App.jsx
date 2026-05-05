@@ -1122,149 +1122,97 @@ function CTABanner() {
 function Contact() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '80px' })
-  const [form, setForm] = useState({ naam: '', email: '', bericht: '' })
-  const [sent, setSent] = useState(false)
-  const [focused, setFocused] = useState(null)
-
-  const handleChange = (e) => setForm(f => ({ ...f, [e.target.id]: e.target.value }))
-  const handleSubmit = (e) => { e.preventDefault(); setSent(true) }
-
-  const inputStyle = (id) => ({
-    width: '100%', padding: '0.9rem 0',
-    background: 'transparent', border: 'none',
-    borderBottom: `2px solid ${focused === id ? 'var(--accent)' : 'var(--border)'}`,
-    fontSize: '0.95rem', color: 'var(--text)', outline: 'none',
-    transition: 'border-color 0.3s', fontFamily: 'Plus Jakarta Sans',
-    borderRadius: 0,
-  })
 
   return (
     <section id="contact" style={{ padding: '9rem 2.5rem' }} ref={ref}>
-      <div style={{ maxWidth: 1200, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '7rem', alignItems: 'start' }} className="contact-grid">
-        <div>
-          <motion.span
-            initial={{ opacity: 0, x: -8 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.9, ease: EASE }}
-            style={{ display: 'inline-flex', alignItems: 'center', gap: '0.55rem', fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '1.8rem' }}
-          >
-            <span style={{ display: 'block', width: 22, height: 1.5, background: 'var(--accent)' }} />
-            Contact
-          </motion.span>
+      <div style={{ maxWidth: 680, margin: '0 auto', textAlign: 'center' }}>
+        <motion.span
+          initial={{ opacity: 0, y: 8 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.9, ease: EASE }}
+          style={{ display: 'inline-flex', alignItems: 'center', gap: '0.6rem', fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '1.8rem' }}
+        >
+          <span style={{ display: 'block', width: 22, height: 1.5, background: 'var(--accent)' }} />
+          Contact
+          <span style={{ display: 'block', width: 22, height: 1.5, background: 'var(--accent)' }} />
+        </motion.span>
 
-          <div style={{ overflow: 'hidden' }}>
-            <motion.h2
-              initial={{ y: '100%' }}
-              animate={inView ? { y: 0 } : {}}
-              transition={{ duration: 0.85, ease: EASE_OUT, delay: 0.1 }}
-              style={{ fontFamily: 'Fraunces', fontSize: 'clamp(2.2rem, 4vw, 3.2rem)', color: 'var(--dark)', marginBottom: '1.6rem', letterSpacing: '-0.025em', lineHeight: 1.05 }}
-            >
-              Laten we<br /><em style={{ color: 'var(--accent)' }}>kennismaken</em>
-            </motion.h2>
-          </div>
-
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.95, ease: EASE, delay: 0.22 }}
-            style={{ color: 'var(--mid)', lineHeight: 1.9, marginBottom: '3rem', maxWidth: 380 }}
+        <div style={{ overflow: 'hidden' }}>
+          <motion.h2
+            initial={{ y: '100%' }}
+            animate={inView ? { y: 0 } : {}}
+            transition={{ duration: 1.1, ease: EASE_OUT, delay: 0.08 }}
+            style={{ fontFamily: 'Fraunces', fontSize: 'clamp(2.4rem, 4.5vw, 3.8rem)', color: 'var(--dark)', marginBottom: '1.6rem', letterSpacing: '-0.03em', lineHeight: 1.0 }}
           >
-            Stuur een bericht en ik reageer zo snel mogelijk. Een eerste gesprek is altijd vrijblijvend.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.95, ease: EASE, delay: 0.32 }}
-            style={{ display: 'flex', flexDirection: 'column', gap: '1.1rem' }}
-          >
-            {[
-              'Vrijblijvend kennismakingsgesprek',
-              'Reactie binnen één werkdag',
-              'Altijd een concreet advies',
-            ].map(l => (
-              <div key={l} style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
-                <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--accent)', flexShrink: 0 }} />
-                <span style={{ fontSize: '0.9rem', color: 'var(--mid)' }}>{l}</span>
-              </div>
-            ))}
-          </motion.div>
+            Laten we<br /><em style={{ color: 'var(--accent)' }}>kennismaken</em>
+          </motion.h2>
         </div>
 
-        <AnimatePresence mode="wait">
-          {sent ? (
-            <motion.div
-              key="ok"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.45, ease: EASE }}
-              style={{ background: 'var(--accent-light)', border: '1px solid var(--accent)', borderRadius: 18, padding: '4rem 3rem', textAlign: 'center' }}
-            >
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ type: 'spring', stiffness: 250, damping: 16, delay: 0.1 }}
-                style={{ width: 58, height: 58, borderRadius: '50%', background: 'var(--accent)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem', color: '#fff', fontSize: '1.3rem' }}
-              >
-                ✓
-              </motion.div>
-              <h3 style={{ fontFamily: 'Fraunces', fontSize: '1.9rem', color: 'var(--dark)', marginBottom: '0.6rem', letterSpacing: '-0.01em' }}>Bericht ontvangen</h3>
-              <p style={{ color: 'var(--mid)', fontSize: '0.95rem' }}>Ik neem zo snel mogelijk contact met je op.</p>
-            </motion.div>
-          ) : (
-            <motion.form
-              key="form"
-              onSubmit={handleSubmit}
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.75, ease: EASE, delay: 0.2 }}
-              style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem' }}
-            >
-              {[
-                { id: 'naam', label: 'Uw naam', type: 'text', placeholder: 'Jan de Vries' },
-                { id: 'email', label: 'E-mailadres', type: 'email', placeholder: 'jan@organisatie.nl' },
-              ].map(f => (
-                <div key={f.id} style={{ marginBottom: '2rem' }}>
-                  <label htmlFor={f.id} style={{ display: 'block', fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: focused === f.id ? 'var(--accent)' : 'var(--mid)', marginBottom: '0.5rem', transition: 'color 0.3s' }}>
-                    {f.label}
-                  </label>
-                  <input
-                    id={f.id} type={f.type} placeholder={f.placeholder}
-                    value={form[f.id]} onChange={handleChange} required
-                    style={inputStyle(f.id)}
-                    onFocus={() => setFocused(f.id)}
-                    onBlur={() => setFocused(null)}
-                  />
-                </div>
-              ))}
-              <div style={{ marginBottom: '2.5rem' }}>
-                <label htmlFor="bericht" style={{ display: 'block', fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: focused === 'bericht' ? 'var(--accent)' : 'var(--mid)', marginBottom: '0.5rem', transition: 'color 0.3s' }}>
-                  Uw bericht
-                </label>
-                <textarea
-                  id="bericht" rows={5} placeholder="Vertel kort over uw situatie en hoe ik kan helpen..."
-                  value={form.bericht} onChange={handleChange} required
-                  style={{ ...inputStyle('bericht'), resize: 'vertical' }}
-                  onFocus={() => setFocused('bericht')}
-                  onBlur={() => setFocused(null)}
-                />
-              </div>
-              <motion.button
-                type="submit"
-                style={{ background: 'var(--dark)', color: '#fff', border: 'none', padding: '1rem 2.2rem', borderRadius: 100, fontSize: '0.9rem', fontWeight: 600, alignSelf: 'flex-start', letterSpacing: '0.01em' }}
-                whileHover={{ background: 'var(--accent)', scale: 1.04 }}
-                whileTap={{ scale: 0.97 }}
-                transition={SPRING}
-                data-hover
-              >
-                Verstuur bericht →
-              </motion.button>
-            </motion.form>
-          )}
-        </AnimatePresence>
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.95, ease: EASE, delay: 0.2 }}
+          style={{ color: 'var(--mid)', lineHeight: 1.9, marginBottom: '3rem', fontSize: '1.05rem' }}
+        >
+          Een eerste gesprek is altijd vrijblijvend en concreet.
+          Ik reageer zo snel mogelijk.
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.95, ease: EASE, delay: 0.3 }}
+          style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap', marginBottom: '3.5rem' }}
+        >
+          <motion.a
+            href="mailto:info@msfs.nl"
+            style={{ display: 'inline-flex', alignItems: 'center', gap: '0.6rem', background: 'var(--dark)', color: '#fff', padding: '0.95rem 2rem', borderRadius: 100, fontSize: '0.88rem', fontWeight: 600, textDecoration: 'none', letterSpacing: '0.01em' }}
+            whileHover={{ background: 'var(--accent)', scale: 1.05 }}
+            whileTap={{ scale: 0.97 }}
+            transition={SPRING}
+            data-hover
+          >
+            <svg width="15" height="15" viewBox="0 0 20 20" fill="none">
+              <path d="M2 5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5z" stroke="currentColor" strokeWidth="1.5"/>
+              <path d="M2 5l8 6 8-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+            </svg>
+            Stuur een e-mail
+          </motion.a>
+          <motion.a
+            href="https://www.linkedin.com/in/moniquesmeding"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ display: 'inline-flex', alignItems: 'center', gap: '0.6rem', background: 'transparent', color: 'var(--dark)', border: '1.5px solid var(--border)', padding: '0.95rem 2rem', borderRadius: 100, fontSize: '0.88rem', fontWeight: 600, textDecoration: 'none', letterSpacing: '0.01em' }}
+            whileHover={{ borderColor: 'var(--accent)', color: 'var(--accent)', scale: 1.04 }}
+            whileTap={{ scale: 0.97 }}
+            transition={SPRING}
+            data-hover
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+            LinkedIn
+          </motion.a>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 1.0, ease: EASE, delay: 0.45 }}
+          style={{ display: 'flex', justifyContent: 'center', gap: '3rem', flexWrap: 'wrap' }}
+        >
+          {[
+            'Vrijblijvend kennismakingsgesprek',
+            'Reactie binnen één werkdag',
+            'Altijd concreet advies',
+          ].map((l, i) => (
+            <div key={l} style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+              <span style={{ width: 5, height: 5, borderRadius: '50%', background: 'var(--accent)', flexShrink: 0 }} />
+              <span style={{ fontSize: '0.82rem', color: 'var(--mid)' }}>{l}</span>
+            </div>
+          ))}
+        </motion.div>
       </div>
-      <style>{`@media (max-width: 860px) { .contact-grid { grid-template-columns: 1fr !important; gap: 3.5rem !important; } }`}</style>
     </section>
   )
 }
