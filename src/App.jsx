@@ -545,13 +545,18 @@ function Hero() {
               transition={{ duration: 0.6, ease: EASE, delay: 0.35 }}
               style={{ display: 'block', width: 30, height: 1.5, background: 'var(--accent)', transformOrigin: 'left' }}
             />
-            <span style={{ fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--accent)' }}>
-              Financieel interim advies · MSFS
-            </span>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
+              <span style={{ fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--accent)' }}>
+                MSFS · Monique Smeding
+              </span>
+              <span style={{ fontSize: '0.65rem', fontWeight: 500, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--mid)', opacity: 0.8 }}>
+                Financieel Specialist
+              </span>
+            </div>
           </motion.div>
 
-          <div style={{ overflow: 'hidden', marginBottom: '0.08em' }}>
-            <h1 style={{ fontSize: 'clamp(3.8rem, 7vw, 7.5rem)', color: 'var(--dark)', letterSpacing: '-0.035em', lineHeight: 0.92 }}>
+          <div style={{ overflow: 'hidden', marginBottom: '0.6rem' }}>
+            <h1 style={{ fontSize: 'clamp(3.8rem, 7vw, 7.5rem)', color: 'var(--dark)', letterSpacing: '-0.035em', lineHeight: 1.05 }}>
               {words1.map((w, i) => (
                 <motion.span
                   key={i}
@@ -566,7 +571,7 @@ function Hero() {
             </h1>
           </div>
           <div style={{ overflow: 'hidden', marginBottom: '3rem' }}>
-            <h1 style={{ fontSize: 'clamp(3.8rem, 7vw, 7.5rem)', letterSpacing: '-0.035em', lineHeight: 0.92 }}>
+            <h1 style={{ fontSize: 'clamp(3.8rem, 7vw, 7.5rem)', letterSpacing: '-0.035em', lineHeight: 1.05 }}>
               {words2.map((w, i) => (
                 <motion.span
                   key={i}
@@ -600,8 +605,8 @@ function Hero() {
             transition={{ duration: 0.6, ease: EASE, delay: 1.35 }}
             style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}
           >
+            <MagneticBtn href="#diensten" dark>Ontdek het werk ↓</MagneticBtn>
             <MagneticBtn href="#contact" dark>Neem contact op</MagneticBtn>
-            <MagneticBtn href="#diensten">Ontdek het werk ↓</MagneticBtn>
           </motion.div>
         </div>
 
@@ -630,7 +635,7 @@ const MARQUEE_ITEMS = [
 
 function Marquee() {
   return (
-    <div style={{ background: 'var(--accent)', padding: '0.95rem 0', overflow: 'hidden', display: 'flex' }}>
+    <div style={{ background: 'var(--dark)', padding: '0.95rem 0', overflow: 'hidden', display: 'flex' }}>
       <motion.div
         animate={{ x: ['0%', '-50%'] }}
         transition={{ duration: 28, ease: 'linear', repeat: Infinity }}
