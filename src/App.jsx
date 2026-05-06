@@ -608,7 +608,7 @@ function Hero() {
           >
             <MagneticBtn href="#diensten" dark>Ontdek het werk ↓</MagneticBtn>
             <MagneticBtn href="#contact" dark>Neem contact op</MagneticBtn>
-            <MagneticBtn href="#over">Wie is Monique?</MagneticBtn>
+            <MagneticBtn href="#over" dark>Wie is Monique?</MagneticBtn>
           </motion.div>
         </div>
 
@@ -1239,7 +1239,7 @@ function Footer() {
           <div>
             <div style={{ fontFamily: 'Fraunces', fontSize: '1.25rem', color: '#fff', marginBottom: 6, letterSpacing: '-0.01em' }}>MSFS</div>
             <div style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.28)', lineHeight: 1.65 }}>
-              Monique Smeding Financieel Specialisme<br />Financieel interim advies
+              Monique Smeding<br />Financieel Specialist
             </div>
           </div>
           <div style={{ display: 'flex', gap: '2.5rem', flexWrap: 'wrap' }}>
