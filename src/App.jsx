@@ -549,6 +549,11 @@ function Hero() {
             <span style={{ fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--accent)' }}>
               Financieel interim advies · MSFS
             </span>
+            <motion.span
+              initial={{ scaleX: 0 }} animate={{ scaleX: 1 }}
+              transition={{ duration: 0.6, ease: EASE, delay: 0.5 }}
+              style={{ display: 'block', width: 30, height: 1.5, background: 'var(--accent)', transformOrigin: 'right' }}
+            />
           </motion.div>
 
           <div style={{ overflow: 'hidden', marginBottom: '0.6rem' }}>
@@ -603,6 +608,7 @@ function Hero() {
           >
             <MagneticBtn href="#diensten" dark>Ontdek het werk ↓</MagneticBtn>
             <MagneticBtn href="#contact" dark>Neem contact op</MagneticBtn>
+            <MagneticBtn href="#over">Wie is Monique?</MagneticBtn>
           </motion.div>
         </div>
 
