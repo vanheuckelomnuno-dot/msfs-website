@@ -556,8 +556,8 @@ function Hero() {
             />
           </motion.div>
 
-          <div style={{ overflow: 'hidden', marginBottom: '0.6rem' }}>
-            <h1 style={{ fontSize: 'clamp(3.8rem, 7vw, 7.5rem)', color: 'var(--dark)', letterSpacing: '-0.035em', lineHeight: 1.05 }}>
+          <div style={{ overflow: 'hidden', marginBottom: '0.6rem', paddingBottom: '0.18em' }}>
+            <h1 style={{ fontSize: 'clamp(3.8rem, 7vw, 7.5rem)', color: 'var(--dark)', letterSpacing: '-0.035em', lineHeight: 1.1 }}>
               {words1.map((w, i) => (
                 <motion.span
                   key={i}
@@ -571,8 +571,8 @@ function Hero() {
               ))}
             </h1>
           </div>
-          <div style={{ overflow: 'hidden', marginBottom: '3rem' }}>
-            <h1 style={{ fontSize: 'clamp(3.8rem, 7vw, 7.5rem)', letterSpacing: '-0.035em', lineHeight: 1.05 }}>
+          <div style={{ overflow: 'hidden', marginBottom: '3rem', paddingBottom: '0.18em' }}>
+            <h1 style={{ fontSize: 'clamp(3.8rem, 7vw, 7.5rem)', letterSpacing: '-0.035em', lineHeight: 1.1 }}>
               {words2.map((w, i) => (
                 <motion.span
                   key={i}
