@@ -141,6 +141,7 @@ function Nav() {
         <a href="#" style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', lineHeight: 1 }} data-hover>
           <span style={{ fontFamily: 'Fraunces', fontSize: '1.35rem', color: 'var(--dark)', letterSpacing: '-0.02em' }}>MSFS</span>
           <span style={{ fontSize: '0.58rem', color: 'var(--accent)', letterSpacing: '0.14em', textTransform: 'uppercase', fontWeight: 600, marginTop: 2 }}>Monique Smeding</span>
+          <span style={{ fontSize: '0.52rem', color: 'var(--mid)', letterSpacing: '0.1em', textTransform: 'uppercase', fontWeight: 500, marginTop: 1, opacity: 0.7 }}>Financieel Specialist</span>
         </a>
 
         <ul className="nav-links" style={{ display: 'flex', gap: '2.5rem', listStyle: 'none', alignItems: 'center' }}>
@@ -545,14 +546,9 @@ function Hero() {
               transition={{ duration: 0.6, ease: EASE, delay: 0.35 }}
               style={{ display: 'block', width: 30, height: 1.5, background: 'var(--accent)', transformOrigin: 'left' }}
             />
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
-              <span style={{ fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--accent)' }}>
-                MSFS · Monique Smeding
-              </span>
-              <span style={{ fontSize: '0.65rem', fontWeight: 500, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--mid)', opacity: 0.8 }}>
-                Financieel Specialist
-              </span>
-            </div>
+            <span style={{ fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--accent)' }}>
+              Financieel interim advies · MSFS
+            </span>
           </motion.div>
 
           <div style={{ overflow: 'hidden', marginBottom: '0.6rem' }}>
