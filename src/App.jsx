@@ -403,41 +403,7 @@ function HeroCard({ sx, sy }) {
       }}>
         <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 3, background: 'linear-gradient(90deg, var(--accent), transparent)' }} />
 
-        <svg viewBox="0 0 380 280" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: 'auto' }}>
-          {[55, 115, 175, 230].map((yv, i) => (
-            <motion.line key={yv} x1="30" y1={yv} x2="360" y2={yv}
-              stroke="#E4E1D9" strokeWidth="1" strokeDasharray="4 4"
-              initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-              transition={{ delay: 1.0 + i * 0.07 }}
-            />
-          ))}
-          <motion.path
-            d="M 50 230 C 90 210, 120 160, 160 138 S 230 98, 278 74 S 340 50, 360 44 L 360 250 L 50 250 Z"
-            fill="var(--accent)" fillOpacity="0.07"
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 1.9 }}
-          />
-          <motion.path
-            d="M 50 230 C 90 210, 120 160, 160 138 S 230 98, 278 74 S 340 50, 360 44"
-            stroke="var(--accent)" strokeWidth="2.5" fill="none" strokeLinecap="round"
-            initial={{ pathLength: 0, opacity: 0 }} animate={{ pathLength: 1, opacity: 1 }}
-            transition={{ duration: 2.2, ease: EASE, delay: 1.0 }}
-          />
-          {[[160, 138], [230, 98], [302, 62]].map(([cx2, cy2], i) => (
-            <motion.circle key={i} cx={cx2} cy={cy2} r={5}
-              fill="#fff" stroke="var(--accent)" strokeWidth="2"
-              initial={{ scale: 0 }} animate={{ scale: 1 }}
-              transition={{ type: 'spring', stiffness: 300, damping: 18, delay: 1.8 + i * 0.15 }}
-            />
-          ))}
-          {['Q1', 'Q2', 'Q3', 'Q4'].map((q, i) => (
-            <motion.text key={q} x={72 + i * 88} y={268}
-              fill="#6B7E8A" fontSize="11" textAnchor="middle" fontFamily="Plus Jakarta Sans"
-              initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-              transition={{ delay: 1.2 + i * 0.07 }}
-            >{q}</motion.text>
-          ))}
-        </svg>
+        <div style={{ height: 80 }} />
 
         <motion.div
           initial={{ opacity: 0, scale: 0.7, y: 12 }}
