@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, useCallback } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import {
   motion,
   useScroll,
@@ -381,97 +381,12 @@ function LinkedInButton() {
   )
 }
 
-function HeroCard({ sx, sy }) {
-  const cx = useTransform(sx, v => v * -0.45)
-  const cy = useTransform(sy, v => v * -0.3)
-
-  return (
-    <motion.div
-      style={{ x: cx, y: cy, width: 420, position: 'relative' }}
-      initial={{ opacity: 0, x: 60 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 1.1, ease: EASE, delay: 0.5 }}
-    >
-      {/* Main card */}
-      <div style={{
-        background: '#fff',
-        borderRadius: 20,
-        boxShadow: '0 40px 80px rgba(26,43,56,0.13), 0 0 0 1px rgba(26,43,56,0.05)',
-        padding: '2rem 2rem 1.5rem',
-        position: 'relative',
-        overflow: 'hidden',
-      }}>
-        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 3, background: 'linear-gradient(90deg, var(--accent), transparent)' }} />
-
-        <div style={{ height: 80 }} />
-
-        <motion.div
-          initial={{ opacity: 0, scale: 0.7, y: 12 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ type: 'spring', stiffness: 200, damping: 20, delay: 2.3 }}
-          style={{
-            position: 'absolute', bottom: '1.6rem', right: '1.6rem',
-            background: 'var(--accent)', borderRadius: 12,
-            padding: '0.7rem 1.1rem',
-          }}
-        >
-          <div style={{ fontSize: '0.6rem', color: 'rgba(255,255,255,0.65)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 2 }}>Resultaat</div>
-          <div style={{ fontSize: '1.5rem', fontWeight: 700, color: '#fff', fontFamily: 'Fraunces', lineHeight: 1 }}>+34%</div>
-        </motion.div>
-      </div>
-
-      {/* Floating badge top-right */}
-      <motion.div
-        initial={{ opacity: 0, x: 20, y: -10 }}
-        animate={{ opacity: 1, x: 0, y: 0 }}
-        transition={{ duration: 0.8, ease: EASE, delay: 2.5 }}
-        style={{
-          position: 'absolute', top: -22, right: -28,
-          background: '#fff', borderRadius: 14,
-          padding: '0.85rem 1.1rem',
-          boxShadow: '0 12px 40px rgba(26,43,56,0.14)',
-          display: 'flex', alignItems: 'center', gap: '0.65rem',
-        }}
-      >
-        <motion.div
-          animate={{ y: [0, -4, 0] }}
-          transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
-          style={{ width: 30, height: 30, borderRadius: '50%', background: 'var(--accent-light)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-        >
-          <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
-            <path d="M2 10 L5 7 L8 8.5 L12 4" stroke="var(--accent)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </motion.div>
-        <div>
-          <div style={{ fontSize: '0.6rem', color: 'var(--mid)', marginBottom: 1 }}>Inzicht</div>
-          <div style={{ fontSize: '0.82rem', fontWeight: 600, color: 'var(--dark)' }}>Helder ✓</div>
-        </div>
-      </motion.div>
-    </motion.div>
-  )
-}
-
 function Hero() {
-  const sectionRef = useRef(null)
-  const mouseX = useMotionValue(0)
-  const mouseY = useMotionValue(0)
-  const sx = useSpring(mouseX, { stiffness: 90, damping: 22 })
-  const sy = useSpring(mouseY, { stiffness: 90, damping: 22 })
-
-  const onMove = useCallback((e) => {
-    const r = sectionRef.current?.getBoundingClientRect()
-    if (!r) return
-    mouseX.set((e.clientX - r.left - r.width / 2) / 45)
-    mouseY.set((e.clientY - r.top - r.height / 2) / 45)
-  }, [])
-
   const words1 = ['Grip', 'op', 'cijfers.']
   const words2 = ['Richting', 'voor', 'de', 'organisatie.']
 
   return (
     <section
-      ref={sectionRef}
-      onMouseMove={onMove}
       style={{
         minHeight: '100vh',
         display: 'flex', alignItems: 'center',
@@ -499,7 +414,7 @@ function Hero() {
         />
       ))}
 
-      <div style={{ maxWidth: 1200, margin: '0 auto', width: '100%', display: 'grid', gridTemplateColumns: '1fr auto', gap: '4rem', alignItems: 'center', position: 'relative' }}>
+      <div style={{ maxWidth: 900, margin: '0 auto', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', position: 'relative' }}>
         <div>
           <motion.div
             initial={{ opacity: 0, x: -16 }}
@@ -561,7 +476,7 @@ function Hero() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: EASE, delay: 1.15 }}
-            style={{ fontSize: '1.08rem', color: 'var(--mid)', lineHeight: 1.8, maxWidth: 420, marginBottom: '3rem' }}
+            style={{ fontSize: '1.08rem', color: 'var(--mid)', lineHeight: 1.8, maxWidth: 420, margin: '0 auto 3rem' }}
           >
             Financieel inzicht dat verder gaat dan rapportages — en leidt tot betere keuzes.
           </motion.p>
@@ -570,25 +485,17 @@ function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: EASE, delay: 1.35 }}
-            style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}
+            style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center' }}
           >
             <MagneticBtn href="#diensten" dark>Ontdek het werk ↓</MagneticBtn>
             <MagneticBtn href="#contact" dark>Neem contact op</MagneticBtn>
             <MagneticBtn href="#over" dark>Wie is Monique?</MagneticBtn>
           </motion.div>
         </div>
-
-        <div className="hero-card-wrapper">
-          <HeroCard sx={sx} sy={sy} />
-        </div>
       </div>
 
       {/* Scroll indicator — verdwijnt zodra gebruiker scrollt */}
       <ScrollIndicator />
-
-      <style>{`
-        @media (max-width: 900px) { .hero-card-wrapper { display: none !important; } }
-      `}</style>
     </section>
   )
 }
